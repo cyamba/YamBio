@@ -1,7 +1,6 @@
 package com.yambacode.bio.sequence;
 
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import static com.yambacode.bio.sequence.utils.Transcriptions.translateUsingForLoop;
 
 final class RNASequence extends BioSequence {
 
@@ -25,12 +24,6 @@ final class RNASequence extends BioSequence {
     }
 
     private String translateToProtein() {
-        System.out.println();
-        return IntStream.range(0, sequence.length() / 3)
-                .mapToObj(i -> sequence.substring(i * 3, Math.min((i + 1) * 3, sequence.length())))
-                .map(CodonTable::translate)
-                .takeWhile(aminoAcid -> aminoAcid != AminoAcid.STOP)
-                .map(String::valueOf)
-                .collect(Collectors.joining());
+        return translateUsingForLoop(this.sequence);
     }
 }

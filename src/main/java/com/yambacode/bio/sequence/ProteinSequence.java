@@ -8,8 +8,10 @@ final class ProteinSequence extends BioSequence {
 
     @Override
     protected void validateSequence(String sequence) {
-        if (!sequence.isEmpty() && !sequence.matches("[ACDEFGHIKLMNPQRSTVWYacdefghiklmnpqrstvwy]+"))
-            throw new IllegalArgumentException("Invalid protein sequence: " + sequence);
+        if (sequence.isEmpty() || sequence.matches("[ACDEFGHIKLMNPQRSTVWYacdefghiklmnpqrstvwy]+")) {
+            return;
+        }
+        throw new IllegalArgumentException("Invalid protein sequence: " + sequence);
     }
 
     @Override

@@ -2,9 +2,9 @@ package com.yambacode.bio.sequence;
 
 import java.util.Map;
 
-class CodonTable {
+public class CodonTable {
 
-    private static final Map<String, AminoAcid> CODON_MAP = Map.ofEntries(
+    private static final Map<String, AminoAcid> CODON_MAP = Map.<String, AminoAcid>ofEntries(
             Map.entry("UUU", AminoAcid.F), Map.entry("UUC", AminoAcid.F),
             Map.entry("UUA", AminoAcid.L), Map.entry("UUG", AminoAcid.L),
             Map.entry("UCU", AminoAcid.S), Map.entry("UCC", AminoAcid.S), Map.entry("UCA", AminoAcid.S), Map.entry("UCG", AminoAcid.S),

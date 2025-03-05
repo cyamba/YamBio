@@ -3,7 +3,7 @@ package com.yambacode.bio.sequence;
 import lombok.Getter;
 
 @Getter
-enum AminoAcid {
+public enum AminoAcid {
 
     F("Phenylalanine", "Phe"),
     L("Leucine", "Leu"),
