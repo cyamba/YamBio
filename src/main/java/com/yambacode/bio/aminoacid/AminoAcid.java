@@ -1,4 +1,4 @@
-package com.yambacode.bio.sequence;
+package com.yambacode.bio.aminoacid;
 
 import lombok.Getter;
 

@@ -1,5 +1,8 @@
 package com.yambacode.bio.sequence;
 
+import com.yambacode.bio.aminoacid.AminoAcid;
+
+import java.util.Collections;
 import java.util.Map;
 
 public class CodonTable {
@@ -32,12 +35,18 @@ public class CodonTable {
     );
 
     public static AminoAcid translate(String codon) {
-        if (codon.length() != 3) {
-            throw new IllegalArgumentException("Malformed codon (must be 3 bases): " + codon);
+        if (codon == null || codon.length() != 3) {
+            throw new IllegalArgumentException("Invalid codon: must be a non-null string of length 3.");
         }
-        if (!CODON_MAP.containsKey(codon)) {
-            throw new IllegalArgumentException("Unknown codon (not in genetic code): " + codon);
+        AminoAcid aminoAcid = CODON_MAP.get(codon.toUpperCase());
+        if (aminoAcid == null) {
+            throw new IllegalArgumentException("Unknown codon: " + codon);
         }
-        return CODON_MAP.get(codon);
+        return aminoAcid;
     }
+
+    public static Map<String, AminoAcid> getCodonMap() {
+        return Collections.unmodifiableMap(CODON_MAP);
+    }
+
 }

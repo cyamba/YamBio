@@ -1,5 +1,7 @@
 package com.yambacode.bio.sequence;
 
+import com.yambacode.bio.nucleicacid.NucleicAcidUtils;
+
 public final class DNASequence extends BioSequence {
 
     public DNASequence(String sequence) {
@@ -18,16 +20,6 @@ public final class DNASequence extends BioSequence {
     }
 
     public DNASequence reverseComplement() {
-        StringBuilder complement = new StringBuilder();
-        for (char base : sequence.toCharArray()) {
-            switch (base) {
-                case 'A' -> complement.append('T');
-                case 'T' -> complement.append('A');
-                case 'C' -> complement.append('G');
-                case 'G' -> complement.append('C');
-                default -> throw new IllegalArgumentException("Invalid nucleotide: " + base);
-            }
-        }
-        return new DNASequence(complement.reverse().toString());
+        return new DNASequence(NucleicAcidUtils.reverseComplement(this));
     }
 }

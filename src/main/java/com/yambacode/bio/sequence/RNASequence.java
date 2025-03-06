@@ -1,8 +1,8 @@
 package com.yambacode.bio.sequence;
 
-import static com.yambacode.bio.sequence.utils.Transcriptions.translateUsingForLoop;
+import static com.yambacode.bio.sequence.utils.TranslationUtils.translate;
 
-final class RNASequence extends BioSequence {
+final public class RNASequence extends BioSequence {
 
     public RNASequence(String sequence) {
         super(sequence);
@@ -24,6 +24,6 @@ final class RNASequence extends BioSequence {
     }
 
     private String translateToProtein() {
-        return translateUsingForLoop(this.sequence);
+        return translate(this.sequence);
     }
 }
