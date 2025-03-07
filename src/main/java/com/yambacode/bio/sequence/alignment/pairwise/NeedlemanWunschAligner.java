@@ -22,7 +22,6 @@ public class NeedlemanWunschAligner implements PairwiseSequenceAligner {
 
         initializeScoreMatrix(scoreMatrix,firstSequence.length(),secondSequence.length());
 
-        // Fill score matrix
         for (int i = 1; i <= firstSequence.length(); i++) {
             for (int j = 1; j <= secondSequence.length(); j++) {
                 int matchScore = scoreMatrix[i - 1][j - 1] + (firstSequence.charAt(i - 1) == secondSequence.charAt(j - 1) ? match : mismatch);
