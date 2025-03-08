@@ -1,4 +1,4 @@
 package com.yambacode.bio.sequence.alignment;
 
-public record AlignmentResult(String alignedSequence1, String alignedSequence2, int score) {}
+public record AlignmentResult(String alignedFirstSequence, String alignedSecondSequence, int score) {}
 
