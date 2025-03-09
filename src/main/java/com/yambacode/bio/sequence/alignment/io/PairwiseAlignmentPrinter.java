@@ -13,8 +13,8 @@ public class PairwiseAlignmentPrinter {
     private static final char MISMATCH_CHAR = ' ';
 
     public static String format(PairwiseAlignmentResult result) {
-        String firstSeq = result.alignedFirstSequence();
-        String secondSeq = result.alignedSecondSequence();
+        String firstSeq = result.getAlignedFirstSequence();
+        String secondSeq = result.getAlignedSecondSequence();
 
         int firstLength = firstSeq.length();
         int secondLength = secondSeq.length();

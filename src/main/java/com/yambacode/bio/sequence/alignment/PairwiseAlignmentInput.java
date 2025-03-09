@@ -1,4 +1,12 @@
 package com.yambacode.bio.sequence.alignment;
 
-public record PairwiseAlignmentInput(String firstSequence, String secondSequence) {}
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public class PairwiseAlignmentInput {
+    String firstSequence;
+    String secondSequence;
+}
 

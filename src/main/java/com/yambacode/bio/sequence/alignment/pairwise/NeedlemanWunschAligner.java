@@ -1,6 +1,5 @@
 package com.yambacode.bio.sequence.alignment.pairwise;
 
-import com.yambacode.bio.sequence.alignment.AlignmentResult;
 import com.yambacode.bio.sequence.alignment.PairwiseAlignmentInput;
 
 public class NeedlemanWunschAligner implements PairwiseSequenceAligner {
@@ -15,40 +14,42 @@ public class NeedlemanWunschAligner implements PairwiseSequenceAligner {
     }
 
     @Override
-    public AlignmentResult align(PairwiseAlignmentInput input) {
-        String firstSequence = input.firstSequence();
-        String secondSequence = input.secondSequence();
-        int[][] scoreMatrix = new int[firstSequence.length() + 1][secondSequence.length() + 1];
+        public PairwiseAlignmentResult align(PairwiseAlignmentInput input) {
+            String firstSequence = input.getFirstSequence();
+            String secondSequence = input.getSecondSequence();
+            int[][] scoreMatrix = initializeScoreMatrix(firstSequence,secondSequence);
 
-        initializeScoreMatrix(scoreMatrix,firstSequence.length(),secondSequence.length());
-
-        for (int i = 1; i <= firstSequence.length(); i++) {
-            for (int j = 1; j <= secondSequence.length(); j++) {
-                int matchScore = scoreMatrix[i - 1][j - 1] + (firstSequence.charAt(i - 1) == secondSequence.charAt(j - 1) ? match : mismatch);
-                int delete = scoreMatrix[i - 1][j] + gap;
-                int insert = scoreMatrix[i][j - 1] + gap;
-                scoreMatrix[i][j] = Math.max(matchScore, Math.max(delete, insert));
+            for (int i = 1; i <= firstSequence.length(); i++) {
+                for (int j = 1; j <= secondSequence.length(); j++) {
+                    int matchScore = scoreMatrix[i - 1][j - 1] + (firstSequence.charAt(i - 1) == secondSequence.charAt(j - 1) ? match : mismatch);
+                    int delete = scoreMatrix[i - 1][j] + gap;
+                    int insert = scoreMatrix[i][j - 1] + gap;
+                    scoreMatrix[i][j] = Math.max(matchScore, Math.max(delete, insert));
+                }
             }
+
+            return new PairwiseAlignmentResult(firstSequence, secondSequence, scoreMatrix[firstSequence.length()][secondSequence.length()]);
         }
 
-        return new AlignmentResult(firstSequence, secondSequence, scoreMatrix[firstSequence.length()][secondSequence.length()]);
-    }
-
-    private void initializeScoreMatrix(int[][] scoreMatrix, int firstLength, int secondLength) {
-        int minLength = Math.min(firstLength, secondLength);
+    int[][] initializeScoreMatrix(String firstSequence, String secondSequence) {
+        int firstSequenceLength = firstSequence.length();
+        int secondSequenceLength = secondSequence.length();
+        int[][] scoreMatrix = new int[firstSequenceLength + 1][secondSequenceLength + 1];
+        int minLength = Math.min(firstSequenceLength, secondSequenceLength);
         for (int i = 0; i <= minLength; i++) {
             scoreMatrix[i][0] = i * gap;
             scoreMatrix[0][i] = i * gap;
         }
-        boolean firstIsLonger = firstLength > secondLength;
+        boolean firstIsLonger = firstSequenceLength > secondSequenceLength;
         if (firstIsLonger) {
-            for (int i = minLength + 1; i <= firstLength; i++) {
+            for (int i = minLength + 1; i <= firstSequenceLength; i++) {
                 scoreMatrix[i][0] = i * gap;
             }
         } else {
-            for (int i = minLength + 1; i <= secondLength; i++) {
+            for (int i = minLength + 1; i <= secondSequenceLength; i++) {
                 scoreMatrix[0][i] = i * gap;
             }
         }
+        return scoreMatrix;
     }
 }

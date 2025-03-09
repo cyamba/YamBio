@@ -1,6 +1,6 @@
 package com.yambacode.bio.sequence.alignment;
 
-public interface SequenceAligner<T> {
-    AlignmentResult align(T input);
+public interface SequenceAligner<S, T extends AlignmentResult> {
+    T align(S input);
 }
 

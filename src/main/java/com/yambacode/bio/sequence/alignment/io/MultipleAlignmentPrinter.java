@@ -17,7 +17,7 @@ public class MultipleAlignmentPrinter {
     private static final String NL = "\n";
 
     public static String format(MultipleAlignmentResult result) {
-        List<String> alignedSequences = result.alignedSequences();
+        List<String> alignedSequences = result.getAlignedSequences();
         StringBuilder output = new StringBuilder();
         int length = alignedSequences.getFirst().length();
         StringBuilder consensusLine = new StringBuilder();

@@ -1,4 +1,14 @@
 package com.yambacode.bio.sequence.alignment;
 
-public record AlignmentResult(String alignedFirstSequence, String alignedSecondSequence, int score) {}
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public class AlignmentResult {
+    String alignedFirstSequence;
+    String alignedSecondSequence;
+    int score;
+}
+
 
