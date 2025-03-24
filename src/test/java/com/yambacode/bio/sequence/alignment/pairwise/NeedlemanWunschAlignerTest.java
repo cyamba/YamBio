@@ -29,7 +29,7 @@ class NeedlemanWunschAlignerTest {
         PairwiseAlignmentInput input = new PairwiseAlignmentInput("GATTACA", "GCATGCU");
         PairwiseAlignmentResult result = aligner.align(input);
 
-        int expectedScore = 2; // What should this be?
+        int expectedScore = 2;
         assertEquals(expectedScore, result.getScore());
     }
 
